@@ -18,15 +18,15 @@ namespace MSTest_MoodAnalyzerProblem
     {
         public string AnalyzeMood(string msg)
         {
-            bool mood1 = msg.Contains("Happy");
+            bool mood1 = msg.Contains("Happy", StringComparison.OrdinalIgnoreCase);
             if (mood1)
             {
-                return "Happy";
+                return "HAPPY";
             }
-            bool mood2 = msg.Contains("Sad");
+            bool mood2 = msg.Contains("Sad", StringComparison.OrdinalIgnoreCase);
             if (mood2)
             {
-                return "Sad";
+                return "SAD";
             }
             return null;
         }

@@ -12,7 +12,15 @@ namespace TestProject
 
             string result = obj.AnalyzeMood("Happy"); // Act
 
-            Assert.AreEqual("Happy", result); //Assert
+            Assert.AreEqual("Happy".ToUpper(), result); //Assert
+        }
+        [TestMethod]
+        public void ReturnSad()
+        {
+            MoodAnalyzer mood = new MoodAnalyzer();
+            string result = mood.AnalyzeMood("I am in Sad Mood");
+
+            Assert.AreEqual("Sad".ToUpper(), result);
         }
     }
 }
