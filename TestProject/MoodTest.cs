@@ -36,7 +36,7 @@ namespace TestProject
             MoodAnalyzer mood = new MoodAnalyzer(null);
             string result = mood.AnalyzeMood();
 
-            Assert.IsNull(result);
+            Assert.AreEqual("Happy".ToUpper(), result);
         }
     }
 }

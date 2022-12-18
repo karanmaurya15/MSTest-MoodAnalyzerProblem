@@ -42,7 +42,7 @@ namespace MSTest_MoodAnalyzerProblem
             }
             catch (Exception ex)
             {
-                return null;
+                return "HAPPY";
             }
         }
     }
