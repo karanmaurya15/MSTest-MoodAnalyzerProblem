@@ -10,31 +10,40 @@ namespace MSTest_MoodAnalyzerProblem
 
             Console.WriteLine("Enter String to check Mood");
             string mood = Console.ReadLine();
-            MoodAnalyzer analyzer = new MoodAnalyzer();
+            MoodAnalyzer analyzer = new MoodAnalyzer(mood);
             Console.WriteLine(analyzer.AnalyzeMood());
         }
     }
     public class MoodAnalyzer
     {
         string msg;
-        public MoodAnalyzer() { }
+        public MoodAnalyzer()
+        { 
+        }
         public MoodAnalyzer(string msg)
         {
             this.msg = msg;
         }
         public string AnalyzeMood()
         {
-            bool mood1 = msg.Contains("Happy", StringComparison.OrdinalIgnoreCase);
-            if (mood1)
+            try
             {
+                bool mood1 = msg.Contains("Happy", StringComparison.OrdinalIgnoreCase);
+                if (mood1)
+                {
+                    return "HAPPY";
+                }
+                bool mood2 = msg.Contains("Sad", StringComparison.OrdinalIgnoreCase);
+                if (mood2)
+                {
+                    return "SAD";
+                }
                 return "HAPPY";
             }
-            bool mood2 = msg.Contains("Sad", StringComparison.OrdinalIgnoreCase);
-            if (mood2)
+            catch (Exception ex)
             {
-                return "SAD";
+                return null;
             }
-            return "HAPPY";
         }
     }
 }

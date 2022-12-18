@@ -6,6 +6,15 @@ namespace TestProject
     public class MoodTest
     {
         [TestMethod]
+        public void MoodTester()
+        {
+            MoodAnalyzer obj = new MoodAnalyzer("Happy"); // Arrange
+
+            string result = obj.AnalyzeMood(); // Act
+
+            Assert.AreEqual("Happy".ToUpper(), result); //Assert
+        }
+        [TestMethod]
         public void ReturnSad()
         {
             MoodAnalyzer mood = new MoodAnalyzer("I am in Sad Mood");
@@ -16,10 +25,18 @@ namespace TestProject
         [TestMethod]
         public void ReturnHappy()
         {
-            MoodAnalyzer mood = new MoodAnalyzer("I am in Happy Mood");
+            MoodAnalyzer mood = new MoodAnalyzer("I am in Any Mood");
             string result = mood.AnalyzeMood();
 
             Assert.AreEqual("Happy".ToUpper(), result);
+        }
+        [TestMethod]
+        public void GivenNull()
+        {
+            MoodAnalyzer mood = new MoodAnalyzer(null);
+            string result = mood.AnalyzeMood();
+
+            Assert.IsNull(result);
         }
     }
 }
