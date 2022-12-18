@@ -11,12 +11,18 @@ namespace MSTest_MoodAnalyzerProblem
             Console.WriteLine("Enter String to check Mood");
             string mood = Console.ReadLine();
             MoodAnalyzer analyzer = new MoodAnalyzer();
-            Console.WriteLine(analyzer.AnalyzeMood(mood));
+            Console.WriteLine(analyzer.AnalyzeMood());
         }
     }
     public class MoodAnalyzer
     {
-        public string AnalyzeMood(string msg)
+        string msg;
+        public MoodAnalyzer() { }
+        public MoodAnalyzer(string msg)
+        {
+            this.msg = msg;
+        }
+        public string AnalyzeMood()
         {
             bool mood1 = msg.Contains("Happy", StringComparison.OrdinalIgnoreCase);
             if (mood1)
