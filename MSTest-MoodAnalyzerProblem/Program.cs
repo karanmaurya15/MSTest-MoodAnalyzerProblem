@@ -28,7 +28,7 @@ namespace MSTest_MoodAnalyzerProblem
             {
                 return "SAD";
             }
-            return null;
+            return "HAPPY";
         }
     }
 }
