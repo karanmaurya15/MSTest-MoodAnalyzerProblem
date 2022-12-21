@@ -33,5 +33,19 @@ namespace TestProject
             string result = mood.AnalyzeMood(); 
             Assert.AreEqual("Happy".ToUpper(), result);
         }
+        [TestMethod]
+        public void CustomExceptions_GivenNull_ThrowNull()
+        {
+            MoodAnalyzer mood = new MoodAnalyzer(null);
+            string result = mood.AnalyzeMood();
+            Assert.AreEqual(MoodAnalysisErrors.Null.ToString(), result);
+        }
+        [TestMethod]
+        public void CustomExceptions_GivenEmpty_ThrowEmpty()
+        {
+            MoodAnalyzer mood = new MoodAnalyzer(" ");
+            string result = mood.AnalyzeMood(); 
+            Assert.AreEqual(MoodAnalysisErrors.Empty.ToString(), result);
+        }
     }
 }
