@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Reflection;
 
 namespace MSTest_MoodAnalyzerProblem
 {
     public class MoodAnalyzer
     {
-        string message = string.Empty;
+        public string message { get; set; }
         public MoodAnalyzer()
         {
 
@@ -50,7 +51,9 @@ namespace MSTest_MoodAnalyzerProblem
     public enum MoodAnalysisErrors
     {
         Null,
-        Empty
+        Empty,
+        NO_SUCH_CLASS,
+        NO_SUCH_METHOD
     }
 }
 

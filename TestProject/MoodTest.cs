@@ -40,5 +40,25 @@ namespace TestProject
             string result = mood.AnalyzeMood(); 
             Assert.AreEqual(MoodAnalysisErrors.Empty.ToString(), result);
         }
+        [TestMethod]
+        public void CreateMoodAnalyzerObject_DefaultConstructor_UsingReflection()
+        {
+            MoodAnalyzer objMood = new MoodAnalyzer();
+            var objFactory = MoodAnalyzerFactory.CreateInstance("MoodAnalyzer");
+            objMood.Equals(objFactory);
+        }
+        [TestMethod]
+        public void CreateMoodAnalyzerObject_DefaultConstructor_UsingReflection_GivenImproperClass_ReturnNoSuchClass()
+        {
+            var objFactory = (string)MoodAnalyzerFactory.CreateInstance("MoodAnalyzer");
+            Assert.AreEqual(MoodAnalysisErrors.NO_SUCH_CLASS.ToString(), objFactory);
+        }
+
+        [TestMethod]
+        public void CreateMoodAnalyzerObject_DefaultConstructor_UsingReflectionException_GivenImproperConstructor_ReturnNoSuchMethod()
+        {
+            var objFactory = (string)MoodAnalyzerFactory.CreateInstance("MoodAnalyzer", "MoodAnalyzerFactory");
+            Assert.AreEqual(MoodAnalysisErrors.NO_SUCH_METHOD.ToString(), objFactory);
+        }
     }
 }
