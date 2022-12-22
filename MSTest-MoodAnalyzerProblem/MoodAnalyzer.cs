@@ -53,7 +53,8 @@ namespace MSTest_MoodAnalyzerProblem
         Null,
         Empty,
         NO_SUCH_CLASS,
-        NO_SUCH_METHOD
+        NO_SUCH_METHOD,
+        NO_SUCH_CONSTRUCTOR
     }
 }
 

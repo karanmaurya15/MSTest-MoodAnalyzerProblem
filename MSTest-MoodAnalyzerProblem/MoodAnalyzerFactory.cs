@@ -47,5 +47,27 @@ namespace MSTest_MoodAnalyzerProblem
                 return ex.Message;
             }
         }
+        public static object CreateInstanceParameterConstructor(string className, string constructorName, string message)
+        {
+            Type type = Type.GetType(className);
+            try
+            {
+                if (type == null)
+                {
+                    throw new MoodAnalysisExceptions(MoodAnalysisErrors.NO_SUCH_CLASS.ToString());
+                }
+                if (type.Name != constructorName)
+                {
+                    throw new MoodAnalysisExceptions(MoodAnalysisErrors.NO_SUCH_CONSTRUCTOR.ToString());
+                }
+                ConstructorInfo ctor = type.GetConstructor(new[] { typeof(string) });
+                object instance = ctor.Invoke(new object[] { message });
+                return instance;
+            }
+            catch (MoodAnalysisExceptions ex)
+            {
+                return ex.Message;
+            }
+        }
     }
 }

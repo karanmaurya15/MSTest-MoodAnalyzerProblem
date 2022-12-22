@@ -1,4 +1,5 @@
 using MSTest_MoodAnalyzerProblem;
+using Newtonsoft.Json;
 
 namespace TestProject
 {
@@ -53,12 +54,34 @@ namespace TestProject
             var objFactory = (string)MoodAnalyzerFactory.CreateInstance("MoodAnalyzer");
             Assert.AreEqual(MoodAnalysisErrors.NO_SUCH_CLASS.ToString(), objFactory);
         }
-
         [TestMethod]
         public void CreateMoodAnalyzerObject_DefaultConstructor_UsingReflectionException_GivenImproperConstructor_ReturnNoSuchMethod()
         {
             var objFactory = (string)MoodAnalyzerFactory.CreateInstance("MoodAnalyzer", "MoodAnalyzerFactory");
             Assert.AreEqual(MoodAnalysisErrors.NO_SUCH_METHOD.ToString(), objFactory);
+        }
+        [TestMethod]
+        public void CreateMoodAnalyzerObject_ParameterConstructor_UsingReflection()
+        {
+            object objMood = new MoodAnalyzer("HAPPY");
+            string exp = JsonConvert.SerializeObject(objMood);
+            object objFactory = MoodAnalyzerFactory.CreateInstanceParameterConstructor("MoodAnalyzerProblem.MoodAnalyzer", "MoodAnalyzer", "HAPPY");
+            string actual = JsonConvert.SerializeObject(objFactory);
+            Assert.AreEqual(exp, actual);
+        }
+        [TestMethod]
+        public void CreateMoodAnalyzerObject_ParameterConstructor_UsingReflectionException_GivenImproperClass_ReturnNoSuchClass()
+        {
+            MoodAnalyzer objMood = new MoodAnalyzer("HAPPY");
+            var objFactory = MoodAnalyzerFactory.CreateInstanceParameterConstructor("MoodAnalyzerProblem.MoodAnalyzers", "MoodAnalyzer", "HAPPY");
+            Assert.AreEqual(MoodAnalysisErrors.NO_SUCH_CLASS.ToString(), objFactory);
+        }
+        [TestMethod]
+        public void CreateMoodAnalyzerObject_ParameterConstructor_UsingReflectionException_GivenImproperConstructor_ReturnNoSuchMethod()
+        {
+            MoodAnalyzer objMood = new MoodAnalyzer("HAPPY");
+            var objFactory = (string)MoodAnalyzerFactory.CreateInstanceParameterConstructor("MoodAnalyzerProblem.MoodAnalyzer", "MoodAnalyser", "HAPPY");
+            Assert.AreEqual(MoodAnalysisErrors.NO_SUCH_CONSTRUCTOR.ToString(), objFactory);
         }
     }
 }
