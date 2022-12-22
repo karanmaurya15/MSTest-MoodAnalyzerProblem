@@ -8,10 +8,6 @@ namespace MSTest_MoodAnalyzerProblem
 {
     public class MoodAnalysisExceptions : Exception
     {
-        public MoodAnalysisExceptions()
-        {
-
-        }
         public MoodAnalysisExceptions(string message) : base(message)
         {
 

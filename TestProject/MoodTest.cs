@@ -6,6 +6,7 @@ namespace TestProject
     [TestClass]
     public class AnalyzeMoodTest
     {
+        
         [TestMethod]
         public void TestHappyOrSad()
         {
@@ -13,6 +14,7 @@ namespace TestProject
             string result = mood.AnalyzeMood(); // Act
             Assert.AreEqual("Happy".ToUpper(), result); //Assert
         }
+        
         [TestMethod]
         public void GivenSad_ReturnSad()
         {
@@ -27,6 +29,7 @@ namespace TestProject
             string result = mood.AnalyzeMood();
             Assert.AreEqual("Happy".ToUpper(), result);
         }
+        // TC-3.1
         [TestMethod]
         public void CustomExceptions_GivenNull_ThrowNull()
         {
@@ -34,6 +37,7 @@ namespace TestProject
             string result = mood.AnalyzeMood();
             Assert.AreEqual(MoodAnalysisErrors.Null.ToString(), result);
         }
+        // TC-3.2
         [TestMethod]
         public void CustomExceptions_GivenEmpty_ThrowEmpty()
         {
@@ -41,6 +45,7 @@ namespace TestProject
             string result = mood.AnalyzeMood(); 
             Assert.AreEqual(MoodAnalysisErrors.Empty.ToString(), result);
         }
+        // TC-4.1
         [TestMethod]
         public void CreateMoodAnalyzerObject_DefaultConstructor_UsingReflection()
         {
@@ -48,18 +53,21 @@ namespace TestProject
             var objFactory = MoodAnalyzerFactory.CreateInstance("MoodAnalyzer");
             objMood.Equals(objFactory);
         }
+        // TC-4.2
         [TestMethod]
         public void CreateMoodAnalyzerObject_DefaultConstructor_UsingReflection_GivenImproperClass_ReturnNoSuchClass()
         {
             var objFactory = (string)MoodAnalyzerFactory.CreateInstance("MoodAnalyzer");
             Assert.AreEqual(MoodAnalysisErrors.NO_SUCH_CLASS.ToString(), objFactory);
         }
+        // TC-4.3
         [TestMethod]
         public void CreateMoodAnalyzerObject_DefaultConstructor_UsingReflectionException_GivenImproperConstructor_ReturnNoSuchMethod()
         {
             var objFactory = (string)MoodAnalyzerFactory.CreateInstance("MoodAnalyzer", "MoodAnalyzerFactory");
             Assert.AreEqual(MoodAnalysisErrors.NO_SUCH_METHOD.ToString(), objFactory);
         }
+        // TC-5.1
         [TestMethod]
         public void CreateMoodAnalyzerObject_ParameterConstructor_UsingReflection()
         {
@@ -69,6 +77,7 @@ namespace TestProject
             string actual = JsonConvert.SerializeObject(objFactory);
             Assert.AreEqual(exp, actual);
         }
+        // TC-5.2
         [TestMethod]
         public void CreateMoodAnalyzerObject_ParameterConstructor_UsingReflectionException_GivenImproperClass_ReturnNoSuchClass()
         {
@@ -76,6 +85,7 @@ namespace TestProject
             var objFactory = MoodAnalyzerFactory.CreateInstanceParameterConstructor("MoodAnalyzerProblem.MoodAnalyzers", "MoodAnalyzer", "HAPPY");
             Assert.AreEqual(MoodAnalysisErrors.NO_SUCH_CLASS.ToString(), objFactory);
         }
+        // TC-5.3
         [TestMethod]
         public void CreateMoodAnalyzerObject_ParameterConstructor_UsingReflectionException_GivenImproperConstructor_ReturnNoSuchMethod()
         {
@@ -83,6 +93,7 @@ namespace TestProject
             var objFactory = (string)MoodAnalyzerFactory.CreateInstanceParameterConstructor("MoodAnalyzerProblem.MoodAnalyzer", "MoodAnalyser", "HAPPY");
             Assert.AreEqual(MoodAnalysisErrors.NO_SUCH_CONSTRUCTOR.ToString(), objFactory);
         }
+        // TC-6.1
         [TestMethod]
         public void InvokeMethod_GivenHappy_ReturnHappy()
         {
@@ -90,11 +101,36 @@ namespace TestProject
             string actual = MoodAnalyzerFactory.InvokeMethod("AnalyzeMood", "HAPPY");
             Assert.AreEqual(expected, actual);
         }
+        // TC-6.2
         [TestMethod]
         public void InvokeMethod_GivenImproperMethod_ReturnException()
         {
             string expected = MoodAnalysisErrors.NO_SUCH_METHOD.ToString();
             string actual = MoodAnalyzerFactory.InvokeMethod("Analyze", MoodAnalysisErrors.NO_SUCH_METHOD.ToString());
+            Assert.AreEqual(expected, actual);
+        }
+        // TC-7.1
+        [TestMethod]
+        public void ChangeMoodDynamically_GivenHappy_ReturnHappy()
+        {
+            string expected = "HAPPY";
+            string actual = MoodAnalyzerFactory.ChangeMoodDynamically("message", "HAPPY");
+            Assert.AreEqual(expected, actual);
+        }
+        // TC-7.2
+        [TestMethod]
+        public void ChangeMoodDynamically_GivenImproperField_ReturnException()
+        {
+            string expected = MoodAnalysisErrors.NO_SUCH_FIELD.ToString();
+            string actual = MoodAnalyzerFactory.ChangeMoodDynamically("messageWrong", MoodAnalysisErrors.NO_SUCH_FIELD.ToString());
+            Assert.AreEqual(expected, actual);
+        }
+        // TC-7.3
+        [TestMethod]
+        public void ChangeMoodDynamically_GivenNull_ReturnNull()
+        {
+            string expected = MoodAnalysisErrors.Null.ToString();
+            string actual = MoodAnalyzerFactory.ChangeMoodDynamically("message", null);
             Assert.AreEqual(expected, actual);
         }
     }

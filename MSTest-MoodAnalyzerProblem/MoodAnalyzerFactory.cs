@@ -84,5 +84,28 @@ namespace MSTest_MoodAnalyzerProblem
                 return ex.Message;
             }
         }
+        public static string ChangeMoodDynamically(string variableName, string setValue)
+        {
+            MoodAnalyzer objMood = new MoodAnalyzer();
+            Type type = typeof(MoodAnalyzer);
+            try
+            {
+                PropertyInfo propertyInfo = type.GetProperty("message");
+                propertyInfo.SetValue(objMood, setValue);
+                if (setValue == null)
+                {
+                    throw new MoodAnalysisExceptions(MoodAnalysisErrors.Null.ToString());
+                }
+                if (propertyInfo == null)
+                {
+                    throw new MoodAnalysisExceptions(MoodAnalysisErrors.NO_SUCH_FIELD.ToString());
+                }
+                return objMood.message;
+            }
+            catch (MoodAnalysisExceptions ex)
+            {
+                return ex.Message;
+            }
+        }
     }
 }

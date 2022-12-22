@@ -9,7 +9,8 @@ namespace MSTest_MoodAnalyzerProblem
 {
     public class MoodAnalyzer
     {
-        public string message;
+        //public string message;
+        public string message { get; set; }
         public MoodAnalyzer()
         {
 
@@ -58,7 +59,8 @@ namespace MSTest_MoodAnalyzerProblem
         Empty,
         NO_SUCH_CLASS,
         NO_SUCH_METHOD,
-        NO_SUCH_CONSTRUCTOR
+        NO_SUCH_CONSTRUCTOR,
+        NO_SUCH_FIELD
     }
 }
 

@@ -6,6 +6,7 @@ namespace MSTest_MoodAnalyzerProblem
     {
         static void Main(string[] args)
         {
+
             Console.WriteLine("Enter String to check Mood");
             string mood = Console.ReadLine();
             MoodAnalyzer analyzer = new MoodAnalyzer(mood);
