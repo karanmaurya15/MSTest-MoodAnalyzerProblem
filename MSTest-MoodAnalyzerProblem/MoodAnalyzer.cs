@@ -9,7 +9,7 @@ namespace MSTest_MoodAnalyzerProblem
 {
     public class MoodAnalyzer
     {
-        public string message { get; set; }
+        public string message;
         public MoodAnalyzer()
         {
 
@@ -45,6 +45,10 @@ namespace MSTest_MoodAnalyzerProblem
             catch (MoodAnalysisExceptions ex)
             {
                 return ex.Message;
+            }
+            catch (Exception ex)
+            {
+                return "HAPPY";
             }
         }
     }

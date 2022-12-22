@@ -83,5 +83,19 @@ namespace TestProject
             var objFactory = (string)MoodAnalyzerFactory.CreateInstanceParameterConstructor("MoodAnalyzerProblem.MoodAnalyzer", "MoodAnalyser", "HAPPY");
             Assert.AreEqual(MoodAnalysisErrors.NO_SUCH_CONSTRUCTOR.ToString(), objFactory);
         }
+        [TestMethod]
+        public void InvokeMethod_GivenHappy_ReturnHappy()
+        {
+            string expected = "HAPPY";
+            string actual = MoodAnalyzerFactory.InvokeMethod("AnalyzeMood", "HAPPY");
+            Assert.AreEqual(expected, actual);
+        }
+        [TestMethod]
+        public void InvokeMethod_GivenImproperMethod_ReturnException()
+        {
+            string expected = MoodAnalysisErrors.NO_SUCH_METHOD.ToString();
+            string actual = MoodAnalyzerFactory.InvokeMethod("Analyze", MoodAnalysisErrors.NO_SUCH_METHOD.ToString());
+            Assert.AreEqual(expected, actual);
+        }
     }
 }

@@ -10,10 +10,6 @@ namespace MSTest_MoodAnalyzerProblem
 {
     public class MoodAnalyzerFactory
     {
-        public MoodAnalyzerFactory()
-        {
-
-        }
         public static object CreateInstance(string className, [Optional] string constructorName)
         {
             try
@@ -63,6 +59,25 @@ namespace MSTest_MoodAnalyzerProblem
                 ConstructorInfo ctor = type.GetConstructor(new[] { typeof(string) });
                 object instance = ctor.Invoke(new object[] { message });
                 return instance;
+            }
+            catch (MoodAnalysisExceptions ex)
+            {
+                return ex.Message;
+            }
+        }
+        public static string InvokeMethod(string methodName, string message)
+        {
+            Type type = typeof(MoodAnalyzer);
+            try
+            {
+                object methodObject = MoodAnalyzerFactory.CreateInstanceParameterConstructor("MoodAnalyzer", "MoodAnalyzer", message);
+                MethodInfo methodInfo = type.GetMethod(methodName);
+                if (methodInfo == null)
+                {
+                    throw new MoodAnalysisExceptions(MoodAnalysisErrors.NO_SUCH_METHOD.ToString());
+                }
+                string method = (string)methodInfo.Invoke(methodObject, null);
+                return method;
             }
             catch (MoodAnalysisExceptions ex)
             {
