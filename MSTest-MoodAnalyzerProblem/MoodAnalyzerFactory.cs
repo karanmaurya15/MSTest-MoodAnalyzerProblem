@@ -6,15 +6,12 @@ using System.Threading.Tasks;
 
 namespace MSTest_MoodAnalyzerProblem
 {
-    public class MoodAnalysisExceptions : Exception
+    public class MoodAnalyzerFactory
     {
-        public MoodAnalysisExceptions()
+        public static Type CreateInstance(string className)
         {
-
-        }
-        public MoodAnalysisExceptions(string message) : base(message)
-        {
-
+            Type type = Type.GetType(className);
+            return type;
         }
     }
 }

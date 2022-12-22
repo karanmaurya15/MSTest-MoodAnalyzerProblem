@@ -27,13 +27,6 @@ namespace TestProject
             Assert.AreEqual("Happy".ToUpper(), result);
         }
         [TestMethod]
-        public void GivenNull_ReturnHappy()
-        {
-            MoodAnalyzer mood = new MoodAnalyzer(null);
-            string result = mood.AnalyzeMood(); 
-            Assert.AreEqual("Happy".ToUpper(), result);
-        }
-        [TestMethod]
         public void CustomExceptions_GivenNull_ThrowNull()
         {
             MoodAnalyzer mood = new MoodAnalyzer(null);
